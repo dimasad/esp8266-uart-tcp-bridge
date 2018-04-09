@@ -12,6 +12,11 @@ IPAddress subnet(255, 255, 255, 0);
 #define AP_NAME "esp8266-tcp-bridge"
 #endif//AP_NAME
 
+#ifndef BAUD_RATE
+#define BAUD_RATE 38400
+#endif//BAUD_RATE
+
+
 WiFiServer server(1000);
 
 constexpr unsigned NUM_CLIENTS = 10;
@@ -21,7 +26,7 @@ void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
   digitalWrite(LED_BUILTIN, HIGH);
   
-  Serial.begin(230400);
+  Serial.begin(BAUD_RATE);
 
   if (!WiFi.softAPConfig(local_IP, gateway, subnet))
     Serial.println("Error in AP config.");
